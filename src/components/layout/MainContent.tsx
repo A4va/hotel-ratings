@@ -1,4 +1,6 @@
+import React from "react";
 import imgUrl from "../../assets/placeholder.svg";
+import { useAppSelector } from "../store/hooks";
 import { ScrollArea } from "../ui/scroll-area";
 import {
   Card,
@@ -8,13 +10,49 @@ import {
 } from "@/components/ui/card";
 import { DollarSign, MapPin } from "lucide-react";
 
+const dummyData = [
+  { id: 1, name: "Hotel A" },
+  { id: 2, name: "Hotel B" },
+  { id: 3, name: "Hotel C" },
+];
+
 export default function MainContent() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const stringValue = useAppSelector((state: any) => state.searchValue);
+  const [searchResults, setSearchResults] = React.useState(dummyData);
+
+  React.useEffect(() => {
+    if (stringValue) {
+      setSearchResults(filterData(stringValue.value));
+    } else {
+      setSearchResults(dummyData);
+    }
+  }, [stringValue]);
+
+  function filterData(value: string) {
+    return dummyData.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase()),
+    );
+  }
+
+  if (!stringValue) {
+    return (
+      <main className="flex w-full flex-col pb-8">
+        <h1 className="pb-4 text-4xl font-bold md:px-4">Lodaing...</h1>
+        <div className="flex whitespace-nowrap rounded-md empty:h-96 sm:border md:p-4"></div>
+      </main>
+    );
+  }
+
   return (
-    <main className="flex flex-col pb-8 w-full">
-      <h1 className="pb-4 text-4xl font-bold md:px-4">00 Results</h1>
+    <main className="flex w-full flex-col pb-8">
+      <h1 className="pb-4 text-4xl font-bold md:px-4">
+        {searchResults.length} Results
+      </h1>
       <ScrollArea className="whitespace-nowrap rounded-md sm:border">
-        <div className="grid grid-cols-2 gap-4 md:p-4 lg:grid-cols-3 xl:grid-cols-5 min-h-[382.5px]">
-            <Card>
+        <div className="grid grid-cols-2 gap-4 empty:h-96 md:p-4 lg:grid-cols-3 xl:grid-cols-5">
+          {searchResults.map((item) => (
+            <Card key={item.id}>
               <a href="">
                 <img
                   alt="Gallery Image 1"
@@ -29,7 +67,7 @@ export default function MainContent() {
                 />
               </a>
               <CardHeader className="p-4">
-                <CardTitle>Name</CardTitle>
+                <CardTitle>{item.name}</CardTitle>
                 <CardDescription className="flex items-center gap-0.5">
                   <MapPin size={18} strokeWidth="1.4" />
                   Location
@@ -40,6 +78,7 @@ export default function MainContent() {
                 </h4>
               </CardHeader>
             </Card>
+          ))}
         </div>
       </ScrollArea>
     </main>

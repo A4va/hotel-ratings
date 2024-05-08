@@ -1,8 +1,7 @@
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { ModeToggle } from "../mode-toggle";
 import { MenuSheet } from "../menu-sheet";
-import { Search } from "lucide-react";
+import HotelSearch from "../forms/hotel-search";
 
 export default function Header() {
   return (
@@ -11,14 +10,7 @@ export default function Header() {
         <div className="text-nowrap text-lg font-medium uppercase sm:text-2xl">
           hotels
         </div>
-
-        <div className="relative w-full">
-          <Input
-            className="ps-9 sm:w-[350px] md:w-[200px] lg:w-[450px]"
-            placeholder="Search"
-          />
-          <Search className="absolute left-0 top-0 m-2.5 h-4 w-4 text-muted-foreground" />
-        </div>
+        <HotelSearch />
       </div>
       <div className="flex items-center gap-2 sm:gap-6 ">
         <ul className="hidden gap-4 *:text-nowrap hover:*:cursor-pointer hover:*:underline md:flex">
