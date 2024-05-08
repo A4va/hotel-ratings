@@ -14,7 +14,7 @@ export default function Header() {
 
         <div className="relative w-full">
           <Input
-            className="pl-9 ps-4 sm:w-[350px] md:w-[200px] lg:w-[450px]"
+            className="ps-9 sm:w-[350px] md:w-[200px] lg:w-[450px]"
             placeholder="Search"
           />
           <Search className="absolute left-0 top-0 m-2.5 h-4 w-4 text-muted-foreground" />
