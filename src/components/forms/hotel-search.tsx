@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useAppDispatch } from "../store/hooks";
-import { setStringValue } from "../store/searchSlice";
+import { setSearchValue } from "../store/searchSlice";
 
 const formSchema = z.object({
   stringValue: z.string().min(2),
@@ -33,9 +33,9 @@ export default function HotelSearch() {
 
   function handleFetch(value: z.infer<typeof formSchema>) {
     if (value.stringValue.length > 2) {
-      dispatch(setStringValue(value.stringValue));
+      dispatch(setSearchValue(value.stringValue));
     }else{
-        dispatch(setStringValue(""));
+        dispatch(setSearchValue(""));
     }
   }
 
