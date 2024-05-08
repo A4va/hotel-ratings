@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { DollarSign, MapPin } from "lucide-react";
 
-export default function Main() {
+export default function MainContent() {
   return (
     <main className="flex flex-col pb-8 w-full">
       <h1 className="pb-4 text-4xl font-bold md:px-4">00 Results</h1>
