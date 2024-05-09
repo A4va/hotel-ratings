@@ -41,22 +41,22 @@ export default function Aside() {
         date2: nextDate,
         priceFrom: "",
         priceTo: "",
-        numberOfGuests: "",
+        numberOfGuests: "0",
       },
     },
   });
 
   return (
-    <aside className="flex flex-col gap-8 sm:w-64 sm:justify-between lg:min-w-96">
+    <aside className="flex flex-col h-screen gap-8 sm:w-64 sm:justify-between lg:min-w-96">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(() => console.log("hh"))}>
+        <form onSubmit={form.handleSubmit(() => console.log("test"))}>
           <FormField
             control={form.control}
             name="filters"
             render={() => (
               <FormItem>
                 <FormControl>
-                  <div className="">
+                  <>
                     <div className="flex flex-col gap-4">
                       <div className="flex items-end justify-between">
                         <h1 className="text-4xl font-bold">Filters</h1>
@@ -75,9 +75,19 @@ export default function Aside() {
                       </div>
                       <div className="flex flex-col gap-2">
                         <Label>Price</Label>
-                        <div className="flex h-10 w-full gap-4">
-                          <Input placeholder="From" {...form.register("filters.priceFrom")} />
-                          <Input placeholder="To" {...form.register("filters.priceTo")} />
+                        <div className="flex h-10 w-full gap-4 *:[&::-webkit-inner-spin-button]:appearance-none">
+                          <Input
+                            className="[&::-webkit-inner-spin-button]:appearance-none"
+                            type="number"
+                            placeholder="From"
+                            {...form.register("filters.priceFrom")}
+                          />
+                          <Input
+                            className="[&::-webkit-inner-spin-button]:appearance-none"
+                            type="number"
+                            placeholder="To"
+                            {...form.register("filters.priceTo")}
+                          />
                         </div>
                       </div>
                     </div>
@@ -111,7 +121,7 @@ export default function Aside() {
                         apply
                       </Button>
                     </div>
-                  </div>
+                  </>
                 </FormControl>
               </FormItem>
             )}
