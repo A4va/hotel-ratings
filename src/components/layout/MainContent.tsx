@@ -5,12 +5,14 @@ import { ScrollArea } from "../ui/scroll-area";
 import {
   Card,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { DollarSign, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { data } from "../../data/hotels-data.json";
+import { Badge } from "../ui/badge";
 
 export default function MainContent() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -70,11 +72,13 @@ export default function MainContent() {
                   <MapPin size={18} strokeWidth="1.4" />
                   {hotel.location}
                 </CardDescription>
-                <h4 className="flex items-center gap-0.5 text-2xl">
-                  <DollarSign size={22} strokeWidth="2" />
-                  {hotel.price}
-                </h4>
               </CardHeader>
+              <CardFooter className="px-0 py-0">
+                <Badge className="flex w-fit items-center gap-0.5 rounded-ss-none bg-emerald-600 px-2.5 py-0.5 hover:bg-emerald-700 dark:bg-emerald-300 hover:dark:bg-emerald-400">
+                  <DollarSign size={10} strokeWidth="2" />
+                  {hotel.price}
+                </Badge>
+              </CardFooter>
             </Card>
           ))}
         </div>
