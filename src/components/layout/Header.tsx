@@ -21,7 +21,9 @@ export default function Header() {
           <li>About us</li>
           <li>FAQs</li>
         </ul>
-        <Button className="hidden rounded-full sm:block">Join Now!</Button>
+        <Link to="/login">
+          <Button className="hidden rounded-full sm:block">Join Now!</Button>
+        </Link>
         <div className="hidden md:block">
           <ModeToggle />
         </div>
