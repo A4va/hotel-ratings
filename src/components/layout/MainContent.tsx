@@ -52,8 +52,8 @@ export default function MainContent() {
       <ScrollArea className="whitespace-nowrap rounded-md sm:border">
         <div className="grid grid-cols-2 gap-4 empty:h-96 md:p-4 lg:grid-cols-3 xl:grid-cols-5">
           {searchResults.map((hotel) => (
-            <Link to={`/hotels/${hotel.id}`}>
-              <Card className="relative" key={hotel.id}>
+            <Link key={hotel.id} to={`/hotels/${hotel.id}`}>
+              <Card className="relative">
                 <img
                   alt={`${hotel.name}-${hotel.id}`}
                   className="w-full overflow-hidden rounded-t-lg object-cover"

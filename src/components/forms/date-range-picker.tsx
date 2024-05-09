@@ -17,9 +17,15 @@ import {
 export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const currDate = new Date();
+  const nextDate = new Date(currDate);
+  nextDate.setDate(currDate.getDate() + 1);
+
+  const disabledDays = { before: new Date() };
+
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
-    to: undefined,
+    from: currDate,
+    to: nextDate,
   });
 
   return (
@@ -42,7 +48,7 @@ export function DateRangePicker({
                   {format(date.to, "LLL dd, y")}
                 </>
               ) : (
-                <>{format(date.from, "LLL dd, y")} - ???,??,????</>
+                <>{format(date.from, "LLL dd, y")} - ??? ??, ????</>
               )
             ) : (
               <span>Pick a date</span>
@@ -54,6 +60,7 @@ export function DateRangePicker({
             initialFocus
             mode="range"
             defaultMonth={date?.from}
+            disabled={disabledDays}
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
