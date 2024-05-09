@@ -9,28 +9,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DollarSign, MapPin } from "lucide-react";
-
-const dummyData = [
-  { id: 1, name: "Hotel A" },
-  { id: 2, name: "Hotel B" },
-  { id: 3, name: "Hotel C" },
-];
+import { Link } from "react-router-dom";
+import { data } from "../../data/hotels-data.json";
 
 export default function MainContent() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const stringValue = useAppSelector((state: any) => state.searchValue);
-  const [searchResults, setSearchResults] = React.useState(dummyData);
+  const [searchResults, setSearchResults] = React.useState(data);
+  
 
   React.useEffect(() => {
     if (stringValue) {
       setSearchResults(filterData(stringValue.value));
     } else {
-      setSearchResults(dummyData);
+      setSearchResults(data);
     }
   }, [stringValue]);
 
   function filterData(value: string) {
-    return dummyData.filter((item) =>
+    return data.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase()),
     );
   }
@@ -53,7 +50,7 @@ export default function MainContent() {
         <div className="grid grid-cols-2 gap-4 empty:h-96 md:p-4 lg:grid-cols-3 xl:grid-cols-5">
           {searchResults.map((item) => (
             <Card key={item.id}>
-              <a href="">
+              <Link to={`/hotels/${item.id}`}>
                 <img
                   alt="Gallery Image 1"
                   className="w-full overflow-hidden rounded-t-lg object-cover"
@@ -65,7 +62,7 @@ export default function MainContent() {
                     objectFit: "cover",
                   }}
                 />
-              </a>
+              </Link>
               <CardHeader className="p-4">
                 <CardTitle>{item.name}</CardTitle>
                 <CardDescription className="flex items-center gap-0.5">

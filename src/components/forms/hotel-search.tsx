@@ -16,6 +16,7 @@ const formSchema = z.object({
 });
 
 export default function HotelSearch() {
+  
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = React.useState({ stringValue: "" });
 
@@ -34,8 +35,8 @@ export default function HotelSearch() {
   function handleFetch(value: z.infer<typeof formSchema>) {
     if (value.stringValue.length > 2) {
       dispatch(setSearchValue(value.stringValue));
-    }else{
-        dispatch(setSearchValue(""));
+    } else {
+      dispatch(setSearchValue(""));
     }
   }
 
