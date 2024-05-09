@@ -16,7 +16,6 @@ export default function MainContent() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const stringValue = useAppSelector((state: any) => state.searchValue);
   const [searchResults, setSearchResults] = React.useState(data);
-  
 
   React.useEffect(() => {
     if (stringValue) {
@@ -27,8 +26,10 @@ export default function MainContent() {
   }, [stringValue]);
 
   function filterData(value: string) {
-    return data.filter((item) =>
-      item.name.toLowerCase().includes(value.toLowerCase()),
+    return data.filter(
+      (hotel) =>
+        hotel.name.toLowerCase().includes(value.toLowerCase()) ||
+        hotel.location.toLowerCase().includes(value.toLowerCase()),
     );
   }
 
@@ -48,9 +49,9 @@ export default function MainContent() {
       </h1>
       <ScrollArea className="whitespace-nowrap rounded-md sm:border">
         <div className="grid grid-cols-2 gap-4 empty:h-96 md:p-4 lg:grid-cols-3 xl:grid-cols-5">
-          {searchResults.map((item) => (
-            <Card key={item.id}>
-              <Link to={`/hotels/${item.id}`}>
+          {searchResults.map((hotel) => (
+            <Card key={hotel.id}>
+              <Link to={`/hotels/${hotel.id}`}>
                 <img
                   alt="Gallery Image 1"
                   className="w-full overflow-hidden rounded-t-lg object-cover"
@@ -64,14 +65,14 @@ export default function MainContent() {
                 />
               </Link>
               <CardHeader className="p-4">
-                <CardTitle>{item.name}</CardTitle>
+                <CardTitle>{hotel.name}</CardTitle>
                 <CardDescription className="flex items-center gap-0.5">
                   <MapPin size={18} strokeWidth="1.4" />
-                  Location
+                  {hotel.location}
                 </CardDescription>
                 <h4 className="flex items-center gap-0.5 text-2xl">
                   <DollarSign size={22} strokeWidth="2" />
-                  80
+                  {hotel.price}
                 </h4>
               </CardHeader>
             </Card>
