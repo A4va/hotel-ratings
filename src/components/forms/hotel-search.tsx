@@ -10,13 +10,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useAppDispatch } from "../store/hooks";
 import { setSearchValue } from "../store/searchSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 const formSchema = z.object({
   stringValue: z.string().min(2),
 });
 
 export default function HotelSearch() {
-  
+  const navigate = useNavigate();
+  const param = useParams();
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = React.useState({ stringValue: "" });
 
@@ -58,6 +60,11 @@ export default function HotelSearch() {
                   <Input
                     className="ps-9 sm:w-[350px] md:w-[200px] lg:w-[450px]"
                     placeholder="Search"
+                    onFocus={() => {
+                      if (Object.keys(param).length) {
+                        navigate("/");
+                      }
+                    }}
                     onChangeCapture={(e) => handleChange(e)}
                     {...field}
                   />

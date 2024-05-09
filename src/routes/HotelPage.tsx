@@ -1,5 +1,4 @@
 import Header from "@/components/layout/Header";
-import React from "react";
 import { useParams } from "react-router-dom";
 import { data } from "../data/hotels-data.json";
 
@@ -8,7 +7,6 @@ export default function HotelPage() {
 
   const hotel = data.find((e) => e.id === hotelId )
 
-  React.useEffect(() => console.log("rendered" + hotelId), []);
   return (
     <div className="flex h-svh flex-col gap-16 px-4 py-4 md:px-10">
       <Header />
