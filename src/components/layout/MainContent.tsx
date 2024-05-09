@@ -28,11 +28,17 @@ export default function MainContent() {
   }, [stringValue]);
 
   function filterData(value: string) {
-    return data.filter(
-      (hotel) =>
-        hotel.name.toLowerCase().includes(value.toLowerCase()) ||
-        hotel.location.toLowerCase().includes(value.toLowerCase()),
-    );
+    const lowerCaseValue = value.trim().toLowerCase();
+    
+    return data.filter(({ name, location }) => {
+      const lowerCaseName = name.toLowerCase();
+      const lowerCaseLocation = location.toLowerCase();
+
+      return (
+        lowerCaseName.includes(lowerCaseValue) ||
+        lowerCaseLocation.includes(lowerCaseValue)
+      );
+    });
   }
 
   if (!stringValue) {
